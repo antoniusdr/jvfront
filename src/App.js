@@ -12,6 +12,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
 import { Jumbotron } from "react-bootstrap";
+import EditProfile from "./pages/EditProfile";
+import HallOfFame from "./pages/HallOfFame";
+import Submissions from "./pages/Submissions";
+import SubmitSubmission from "./pages/SubmitSubmission";
 
 const Home = () => (
   <Jumbotron>
@@ -39,6 +43,10 @@ function App() {
       {isLoading ? <Loading /> : null}
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route path="/editprofile" component={EditProfile} />
+        <Route path="/halloffame" component={HallOfFame} />
+        <Route path="/submissions" component={Submissions} />
+        <Route path="/submit" component={SubmitSubmission} />
         <Route path="/other" component={Other} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
