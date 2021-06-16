@@ -16,12 +16,21 @@ export default function Navigation() {
   return (
     <Navbar bg="light" expand="lg">
       <Navbar.Brand as={NavLink} to="/">
-        YOUR PROJECT NAME
+        VANDALIZED GANG
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav style={{ width: "100%" }} fill>
           <NavbarItem path="/" linkText="Home" />
+          <NavbarItem path="/submissions" linkText="All Submissions" />
+          {token ? (
+            <>
+              {" "}
+              <NavbarItem path="/submit" linkText="Participate to contest" />
+              <NavbarItem path="/editprofile" linkText="Edit Profile" />
+            </>
+          ) : null}
+
           <NavbarItem path="/other" linkText="Other" />
           {loginLogoutControls}
         </Nav>

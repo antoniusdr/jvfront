@@ -49,7 +49,9 @@ export const signUp = (
       });
 
       dispatch(loginSuccess(response.data));
-      dispatch(showMessageWithTimeout("success", true, "account created"));
+      dispatch(
+        showMessageWithTimeout("success", true, "Welcome to the Vandal Gang!")
+      );
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
