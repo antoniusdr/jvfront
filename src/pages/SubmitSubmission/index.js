@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
@@ -7,9 +7,13 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { useDispatch, useSelector } from "react-redux";
 import SoundCloudPlayer from "../../components/SoundCloudPlayer";
 import { selectUser } from "../../store/user/selectors";
+import { selectContests } from "../../store/contests/selectors";
+import { fetchContests } from "../../store/contests/actions";
+import { postSubmission } from "../../store/submissions/actions";
 
 function SubmitSubmission() {
   const LoggedIn = useSelector(selectUser);
+  const allContests = useSelector(selectContests);
   const dispatch = useDispatch();
   const [soundcloudSubmission, setSoundcloudSubmission] = useState(
     "https://soundcloud.com/danpiamuzik/ariana-grande-3435-citypop-ver"
@@ -20,10 +24,23 @@ function SubmitSubmission() {
   const [descriptionLength, setDescriptionLength] = useState(
     songDescription.length
   );
+  const [selectedContest, setSelectedContest] = useState(0);
+
+  const activeContests = allContests.filter(
+    (contests) => contests.isActive === true
+  );
+
+  useEffect(() => {
+    dispatch(fetchContests());
+  }, [dispatch]);
 
   function submitForm(e) {
+    dispatch(
+      postSubmission(selectedContest, soundcloudSubmission, songDescription)
+    );
     e.preventDefault();
   }
+
   return (
     <div>
       <Jumbotron>
@@ -33,14 +50,25 @@ function SubmitSubmission() {
         <Form as={Col} md={{ span: 6, offset: 3 }}>
           <h1 className="mt-5 mb-5">Send your edit thruuu!</h1>
           <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-              Dropdown Button
+            <Dropdown.Toggle
+              variant="success"
+              id="dropdown-basic"
+              placeholder="Select contest"
+            >
+              Select Contest
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+              {activeContests.map((activeContest, key) => {
+                return (
+                  <Dropdown.Item
+                    key={key}
+                    onClick={() => setSelectedContest(activeContest.id)}
+                  >
+                    {activeContest.description}
+                  </Dropdown.Item>
+                );
+              })}
             </Dropdown.Menu>
           </Dropdown>
           <Form.Group>
