@@ -31,7 +31,7 @@ export default function Navigation() {
             </>
           ) : null}
 
-          <NavbarItem path="/other" linkText="Other" />
+          {/* <NavbarItem path="/other" linkText="Other" /> */}
           {loginLogoutControls}
         </Nav>
       </Navbar.Collapse>
