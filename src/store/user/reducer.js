@@ -2,12 +2,8 @@ import { LOG_OUT, LOGIN_SUCCESS, TOKEN_STILL_VALID } from "./actions";
 
 const initialState = {
   token: localStorage.getItem("token"),
-  firstName: null,
-  lastName: null,
-  email: null,
-  discordName: null,
-  editBattleContestant: false,
-  isAdmin: false,
+  name: null,
+  email: null
 };
 
 export default (state = initialState, action) => {

@@ -11,12 +11,22 @@ import Login from "./pages/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
-// import { Jumbotron } from "react-bootstrap";
+import { Jumbotron } from "react-bootstrap";
 import EditProfile from "./pages/EditProfile";
 import HallOfFame from "./pages/HallOfFame";
 import Submissions from "./pages/Submissions";
 import SubmitSubmission from "./pages/SubmitSubmission";
-import Home from "./pages/Home";
+
+const Home = () => (
+  <Jumbotron>
+    <h1>Home</h1>
+  </Jumbotron>
+);
+const Other = () => (
+  <Jumbotron>
+    <h1>Other</h1>
+  </Jumbotron>
+);
 
 function App() {
   const dispatch = useDispatch();
@@ -37,7 +47,7 @@ function App() {
         <Route path="/halloffame" component={HallOfFame} />
         <Route path="/submissions" component={Submissions} />
         <Route path="/submit" component={SubmitSubmission} />
-        {/* <Route path="/other" component={Other} /> */}
+        <Route path="/other" component={Other} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
       </Switch>
