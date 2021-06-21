@@ -42,9 +42,17 @@ function Submissions() {
         </Dropdown.Menu>
       </Dropdown>
       {submissions
-        .filter((contestSelected) => contestSelected.id === selectedContest)
+        .filter(
+          (contestSelected) => contestSelected.contestId === selectedContest
+        )
         .map((submission) => {
-          return <SoundCloudPlayer soundcloudUrl={submission.soundcloudUrl} />;
+          return (
+            <SoundCloudPlayer
+              soundcloudUrl={submission.soundcloudUrl}
+              songDescription={submission.songDescription}
+              userId={submission.userId}
+            />
+          );
         })}
     </div>
   );
