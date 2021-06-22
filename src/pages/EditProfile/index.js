@@ -86,7 +86,11 @@ function EditProfile() {
             value={instagramHandle}
             onChange={(event) => setInstagramHandle(event.target.value)}
             type="text"
-            placeholder="@jarreauvandal"
+            placeholder={
+              userInfo.instagramHandle
+                ? userInfo.instagramHandle
+                : "@jarreauvandal"
+            }
           />
         </Form.Group>
         <Form.Group>
@@ -95,7 +99,11 @@ function EditProfile() {
             value={twitchHandle}
             onChange={(event) => setTwitchHandle(event.target.value)}
             type="text"
-            placeholder="twitch.tv/jarreauvandal"
+            placeholder={
+              userInfo.twitchHandle
+                ? userInfo.twitchHandle
+                : "twitch.tv/jarreauvandal"
+            }
           />
         </Form.Group>
         <Form.Group>
@@ -112,7 +120,6 @@ function EditProfile() {
             value={emailOptIn}
             onChange={(event) => setEmailOptIn(event.target.checked)}
             type="checkbox"
-            placeholder={userInfo.firstName}
           />
         </Form.Group>
         <Form.Group className="mt-5">

@@ -8,6 +8,8 @@ export const FETCH_SUBMISSIONS_SUCCESS = "FETCH_SUBMISSIONS_SUCCESS";
 
 export const POST_SUBMISSION_SUCCESS = "POST_SUBMISSION_SUCCESS";
 
+export const POST_VOTE_SUCCESS = "POST_VOTE_SUCCESS";
+
 export const fetchSubmissionsSuccess = (submissions) => ({
   type: FETCH_SUBMISSIONS_SUCCESS,
   payload: submissions,
@@ -15,6 +17,11 @@ export const fetchSubmissionsSuccess = (submissions) => ({
 export const submissionPostSuccess = (submission) => ({
   type: POST_SUBMISSION_SUCCESS,
   payload: submission,
+});
+
+export const newVote = (vote) => ({
+  type: POST_VOTE_SUCCESS,
+  payload: vote,
 });
 
 export const fetchSubmissions = () => {
@@ -25,6 +32,21 @@ export const fetchSubmissions = () => {
     );
 
     dispatch(fetchSubmissionsSuccess(res.data.submissions.rows));
+  };
+};
+
+export const postVote = (userId, submissionId) => {
+  return async (dispatch, getState) => {
+    const { token } = selectUser(getState());
+    const res = await axios.post(
+      `${apiUrl}/submissions/vote`,
+      {
+        userId,
+        submissionId,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    console.log(res.data);
   };
 };
 

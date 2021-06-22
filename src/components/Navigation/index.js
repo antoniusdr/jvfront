@@ -24,6 +24,7 @@ export default function Navigation() {
           <NavbarItem path="/" linkText="Home" />
           <NavbarItem path="/submissions" linkText="All Submissions" />
           <NavbarItem path="/submit" linkText="Participate to contest" />
+          <NavbarItem path="/archive" linkText="Archive" />
           {token ? (
             <>
               {" "}

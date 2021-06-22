@@ -4,11 +4,10 @@ import { fetchSubmissions } from "../../store/submissions/actions";
 import { selectSubmissions } from "../../store/submissions/selectors";
 import SoundCloudPlayer from "../../components/SoundCloudPlayer";
 import Dropdown from "react-bootstrap/Dropdown";
-
 import { selectContests } from "../../store/contests/selectors";
 import { fetchContests } from "../../store/contests/actions";
 
-function Submissions() {
+function Archive() {
   const dispatch = useDispatch();
   const allContests = useSelector(selectContests);
   const submissions = useSelector(selectSubmissions);
@@ -19,8 +18,8 @@ function Submissions() {
     dispatch(fetchContests());
   }, [dispatch]);
 
-  const activeContests = allContests.filter(
-    (contests) => contests.isActive === true
+  const inactiveContests = allContests.filter(
+    (contests) => contests.isActive === false
   );
 
   return (
@@ -34,19 +33,18 @@ function Submissions() {
           <Dropdown.Item onClick={() => setSelectedContest(0)}>
             All
           </Dropdown.Item>
-          {activeContests.map((activeContest, key) => {
+          {inactiveContests.map((activeContest, key) => {
             return (
               <Dropdown.Item
                 key={key}
                 onClick={() => setSelectedContest(activeContest.id)}
               >
-                {activeContest.description}
+                {activeContest.contestName}
               </Dropdown.Item>
             );
           })}
         </Dropdown.Menu>
       </Dropdown>
-
       {selectedContest === 0
         ? submissions.map((submission, key) => {
             return (
@@ -56,8 +54,7 @@ function Submissions() {
                 soundcloudUrl={submission.soundcloudUrl}
                 songDescription={submission.songDescription}
                 userId={submission.userId}
-                submissionId={submission.id}
-                activeContest={true}
+                activeContest={false}
               />
             );
           })
@@ -73,8 +70,7 @@ function Submissions() {
                   soundcloudUrl={submission.soundcloudUrl}
                   songDescription={submission.songDescription}
                   userId={submission.userId}
-                  submissionId={submission.id}
-                  activeContest={true}
+                  activeContest={false}
                 />
               );
             })}
@@ -82,4 +78,4 @@ function Submissions() {
   );
 }
 
-export default Submissions;
+export default Archive;
