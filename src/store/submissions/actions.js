@@ -28,7 +28,12 @@ export const fetchSubmissions = () => {
   };
 };
 
-export const postSubmission = (contestId, soundcloudUrl, songDescription) => {
+export const postSubmission = (
+  contestId,
+  soundcloudUrl,
+  songDescription,
+  nickname
+) => {
   return async (dispatch, getState) => {
     const { id, token } = selectUser(getState());
     const res = await axios.post(
@@ -37,6 +42,7 @@ export const postSubmission = (contestId, soundcloudUrl, songDescription) => {
         contestId,
         soundcloudUrl,
         songDescription,
+        nickname,
       },
       { headers: { Authorization: `Bearer ${token}` } }
     );
@@ -45,7 +51,7 @@ export const postSubmission = (contestId, soundcloudUrl, songDescription) => {
       showMessageWithTimeout(
         "success",
         false,
-        "Posted successfull, good luck!",
+        "Posted successfuly, best of luck!",
         10000
       )
     );

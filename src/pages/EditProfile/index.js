@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../store/user/selectors";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import { updateProfile } from "../../store/user/actions";
 
 function EditProfile() {
   const userInfo = useSelector(selectUser);
@@ -17,9 +18,22 @@ function EditProfile() {
   const [instagramHandle, setInstagramHandle] = useState("");
   const [twitchHandle, setTwitchHandle] = useState("");
   const [emailOptIn, setEmailOptIn] = useState(userInfo.emailOptIn);
+  const dispatch = useDispatch();
 
   function submitForm(e) {
     e.preventDefault();
+    dispatch(
+      updateProfile(
+        firstName,
+        lastName,
+        email,
+        discordName,
+        editBattleContestant,
+        instagramHandle,
+        twitchHandle,
+        emailOptIn
+      )
+    );
   }
 
   return (

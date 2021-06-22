@@ -1,6 +1,6 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
-import { selectToken } from "./selectors";
+import { selectToken, selectUser } from "./selectors";
 import {
   appLoading,
   appDoneLoading,
@@ -11,6 +11,41 @@ import {
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
 export const LOG_OUT = "LOG_OUT";
+export const PROFILE_UPDATED = "PROFILE_UPDATED";
+
+export const profileUpdated = (profile) => ({
+  type: PROFILE_UPDATED,
+  payload: profile,
+});
+
+export const updateProfile = (
+  firstName,
+  lastName,
+  email,
+  discordName,
+  editBattleContestant,
+  instagramHandle,
+  twitchHandle,
+  emailOptIn
+) => {
+  return async (dispatch, getState) => {
+    const { id } = selectUser(getState());
+    const res = await axios.patch(`${apiUrl}/user/${id}`, {
+      firstName,
+      lastName,
+      email,
+      discordName,
+      editBattleContestant,
+      instagramHandle,
+      twitchHandle,
+      emailOptIn,
+    });
+    dispatch(profileUpdated(res.data));
+    dispatch(
+      showMessageWithTimeout("success", true, "Profile successfully updated!")
+    );
+  };
+};
 
 const loginSuccess = (userWithToken) => {
   return {

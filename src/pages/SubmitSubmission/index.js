@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import Jumbotron from "react-bootstrap/Jumbotron";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useDispatch, useSelector } from "react-redux";
-import SoundCloudPlayer from "../../components/SoundCloudPlayer";
+import ReactPlayer from "react-player/soundcloud";
 import { selectUser } from "../../store/user/selectors";
 import { selectContests } from "../../store/contests/selectors";
 import { fetchContests } from "../../store/contests/actions";
@@ -18,13 +17,13 @@ function SubmitSubmission() {
   const [soundcloudSubmission, setSoundcloudSubmission] = useState(
     "https://soundcloud.com/danpiamuzik/ariana-grande-3435-citypop-ver"
   );
-  const [songDescription, setSongDescription] = useState(
-    "The one and only winner for the edit battle (optional)"
-  );
+  const [songDescription, setSongDescription] = useState("");
   const [descriptionLength, setDescriptionLength] = useState(
     songDescription.length
   );
   const [selectedContest, setSelectedContest] = useState(0);
+
+  const [nickname, setNickName] = useState("");
 
   const activeContests = allContests.filter(
     (contests) => contests.isActive === true
@@ -36,16 +35,18 @@ function SubmitSubmission() {
 
   function submitForm(e) {
     dispatch(
-      postSubmission(selectedContest, soundcloudSubmission, songDescription)
+      postSubmission(
+        selectedContest,
+        soundcloudSubmission,
+        songDescription,
+        nickname
+      )
     );
     e.preventDefault();
   }
 
   return (
     <div>
-      <Jumbotron>
-        <h1>Participate in the Vandalized Edit Battle!</h1>
-      </Jumbotron>
       {LoggedIn.id ? (
         <Form as={Col} md={{ span: 6, offset: 3 }}>
           <h1 className="mt-5 mb-5">Send your edit thruuu!</h1>
@@ -72,6 +73,18 @@ function SubmitSubmission() {
             </Dropdown.Menu>
           </Dropdown>
           <Form.Group>
+            <Form.Label>Enter Nickname</Form.Label>
+            <Form.Control
+              value={nickname}
+              onChange={(event) => {
+                setNickName(event.target.value);
+              }}
+              type="text"
+              placeholder="Edit King"
+              maxLength="140"
+            />
+          </Form.Group>
+          <Form.Group>
             <Form.Label>Song description</Form.Label>
             <Form.Control
               value={songDescription}
@@ -95,7 +108,7 @@ function SubmitSubmission() {
               required
             />
           </Form.Group>
-          <SoundCloudPlayer soundcloudUrl={soundcloudSubmission} />
+          <ReactPlayer url={soundcloudSubmission} height="70%" />
           <Form.Group className="mt-5">
             <Button variant="primary" type="submit" onClick={submitForm}>
               Submit edit

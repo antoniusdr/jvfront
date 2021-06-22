@@ -23,15 +23,13 @@ export default function Navigation() {
         <Nav style={{ width: "100%" }} fill>
           <NavbarItem path="/" linkText="Home" />
           <NavbarItem path="/submissions" linkText="All Submissions" />
+          <NavbarItem path="/submit" linkText="Participate to contest" />
           {token ? (
             <>
               {" "}
-              <NavbarItem path="/submit" linkText="Participate to contest" />
               <NavbarItem path="/editprofile" linkText="Edit Profile" />
             </>
           ) : null}
-
-          {/* <NavbarItem path="/other" linkText="Other" /> */}
           {loginLogoutControls}
         </Nav>
       </Navbar.Collapse>

@@ -28,7 +28,9 @@ function Submissions() {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Item>All</Dropdown.Item>
+          <Dropdown.Item onClick={() => setSelectedContest(0)}>
+            All
+          </Dropdown.Item>
           {activeContests.map((activeContest, key) => {
             return (
               <Dropdown.Item
@@ -41,19 +43,33 @@ function Submissions() {
           })}
         </Dropdown.Menu>
       </Dropdown>
-      {submissions
-        .filter(
-          (contestSelected) => contestSelected.contestId === selectedContest
-        )
-        .map((submission) => {
-          return (
-            <SoundCloudPlayer
-              soundcloudUrl={submission.soundcloudUrl}
-              songDescription={submission.songDescription}
-              userId={submission.userId}
-            />
-          );
-        })}
+      {selectedContest === 0
+        ? submissions.map((submission, key) => {
+            return (
+              <SoundCloudPlayer
+                key={key}
+                nickname={submission.nickname}
+                soundcloudUrl={submission.soundcloudUrl}
+                songDescription={submission.songDescription}
+                userId={submission.userId}
+              />
+            );
+          })
+        : submissions
+            .filter(
+              (contestSelected) => contestSelected.contestId === selectedContest
+            )
+            .map((submission, key) => {
+              return (
+                <SoundCloudPlayer
+                  key={key}
+                  nickname={submission.nickname}
+                  soundcloudUrl={submission.soundcloudUrl}
+                  songDescription={submission.songDescription}
+                  userId={submission.userId}
+                />
+              );
+            })}
     </div>
   );
 }
