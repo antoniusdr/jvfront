@@ -16,6 +16,7 @@ import SubmitSubmission from "./pages/SubmitSubmission";
 import Home from "./pages/Home";
 import Archive from "./pages/Archive";
 import CreateContest from "./pages/CreateContest";
+import AllUsers from "./pages/AllUsers";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function App() {
         <Route path="/submissions" component={Submissions} />
         <Route path="/submit" component={SubmitSubmission} />
         <Route path="/createcontest" component={CreateContest} />
+        <Route path="/allusers" component={AllUsers} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
       </Switch>

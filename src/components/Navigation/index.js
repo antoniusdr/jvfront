@@ -27,9 +27,9 @@ export default function Navigation() {
           <NavbarItem path="/submit" linkText="Participate to contest" />
           <NavbarItem path="/archive" linkText="Archive" />
           <NavbarItem path="/createcontest" linkText="Create Contest" />
+          <NavbarItem path="/allusers" linkText="Admin View" />
           {token ? (
             <>
-              {" "}
               <NavbarItem path="/editprofile" linkText="Edit Profile" />
             </>
           ) : user.isAdmin ? (
