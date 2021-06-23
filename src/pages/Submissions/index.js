@@ -19,9 +19,7 @@ function Submissions() {
     dispatch(fetchContests());
   }, [dispatch]);
 
-  const activeContests = allContests.filter(
-    (contests) => contests.isActive === true
-  );
+  const activeContests = allContests.filter((contests) => contests.isActive);
 
   return (
     <div>
@@ -58,6 +56,7 @@ function Submissions() {
                 userId={submission.userId}
                 submissionId={submission.id}
                 activeContest={true}
+                contestId={submission.contestId}
               />
             );
           })

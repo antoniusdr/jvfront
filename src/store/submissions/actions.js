@@ -35,7 +35,7 @@ export const fetchSubmissions = () => {
   };
 };
 
-export const postVote = (userId, submissionId) => {
+export const postVote = (userId, submissionId, contestId) => {
   return async (dispatch, getState) => {
     const { token } = selectUser(getState());
     const res = await axios.post(
@@ -43,6 +43,7 @@ export const postVote = (userId, submissionId) => {
       {
         userId,
         submissionId,
+        contestId,
       },
       { headers: { Authorization: `Bearer ${token}` } }
     );

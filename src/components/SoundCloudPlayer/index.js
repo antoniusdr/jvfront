@@ -11,7 +11,7 @@ function SoundCloudPlayer(props) {
   const user = useSelector(selectUser);
   function submitForm(e) {
     e.preventDefault();
-    dispatch(postVote(props.userId, props.submissionId));
+    dispatch(postVote(props.userId, props.submissionId, props.contestId));
   }
 
   return (
