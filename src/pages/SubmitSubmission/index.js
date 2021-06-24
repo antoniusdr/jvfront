@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
+import Card from "react-bootstrap/Card";
 import { useDispatch, useSelector } from "react-redux";
 import ReactPlayer from "react-player/soundcloud";
 import { selectUser } from "../../store/user/selectors";
@@ -48,73 +49,95 @@ function SubmitSubmission() {
   return (
     <div>
       {LoggedIn.id ? (
-        <Form as={Col} md={{ span: 6, offset: 3 }}>
-          <h1 className="mt-5 mb-5">Send your edit thruuu!</h1>
-          <Dropdown>
-            <Dropdown.Toggle
-              variant="success"
-              id="dropdown-basic"
-              placeholder="Select contest"
-            >
-              Select Contest
-            </Dropdown.Toggle>
+        <Card
+          style={{
+            width: "60rem",
+            marginTop: 50,
+            marginBottom: 50,
+            marginLeft: 450,
+          }}
+          bg="success"
+          text="warning"
+        >
+          <Form
+            as={Col}
+            md={{ span: 6, offset: 2, marginTop: 5, marginBottom: 5 }}
+          >
+            <h1 className="mt-5 mb-5">Send your edit thruuu!</h1>
+            <Dropdown variant="dark">
+              <Dropdown.Toggle
+                variant="dark"
+                id="dropdown-basic"
+                placeholder="Select contest"
+                style={{
+                  width: "10rem",
+                  marginTop: 20,
+                  marginBottom: 20,
+                  marginLeft: 4,
+                }}
+              >
+                Select Contest
+              </Dropdown.Toggle>
 
-            <Dropdown.Menu>
-              {activeContests.map((activeContest, key) => {
-                return (
-                  <Dropdown.Item
-                    key={key}
-                    onClick={() => setSelectedContest(activeContest.id)}
-                  >
-                    {activeContest.description}
-                  </Dropdown.Item>
-                );
-              })}
-            </Dropdown.Menu>
-          </Dropdown>
-          <Form.Group>
-            <Form.Label>Enter Nickname</Form.Label>
-            <Form.Control
-              value={nickname}
-              onChange={(event) => {
-                setNickName(event.target.value);
-              }}
-              type="text"
-              placeholder="Edit King"
-              maxLength="140"
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Song description</Form.Label>
-            <Form.Control
-              value={songDescription}
-              onChange={(event) => {
-                setSongDescription(event.target.value);
-                setDescriptionLength(event.target.value.length);
-              }}
-              type="text"
-              placeholder="The one and only winner for the edit battle (optional)"
-              maxLength="140"
-            />
-            <p>{descriptionLength} / 140</p>
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Soundcloud URL</Form.Label>
-            <Form.Control
-              value={soundcloudSubmission}
-              onChange={(event) => setSoundcloudSubmission(event.target.value)}
-              type="text"
-              placeholder="https://soundcloud.com/danpiamuzik/ariana-grande-3435-citypop-ver"
-              required
-            />
-          </Form.Group>
-          <ReactPlayer url={soundcloudSubmission} height="70%" />
-          <Form.Group className="mt-5">
-            <Button variant="primary" type="submit" onClick={submitForm}>
-              Submit edit
-            </Button>
-          </Form.Group>
-        </Form>
+              <Dropdown.Menu>
+                {activeContests.map((activeContest, key) => {
+                  return (
+                    <Dropdown.Item
+                      key={key}
+                      onClick={() => setSelectedContest(activeContest.id)}
+                    >
+                      {activeContest.description}
+                    </Dropdown.Item>
+                  );
+                })}
+              </Dropdown.Menu>
+            </Dropdown>
+            <Form.Group>
+              <Form.Label>Enter Nickname</Form.Label>
+              <Form.Control
+                value={nickname}
+                onChange={(event) => {
+                  setNickName(event.target.value);
+                }}
+                type="text"
+                placeholder="Edit King"
+                maxLength="140"
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Song description</Form.Label>
+              <Form.Control
+                value={songDescription}
+                onChange={(event) => {
+                  setSongDescription(event.target.value);
+                  setDescriptionLength(event.target.value.length);
+                }}
+                type="text"
+                placeholder="The one and only winner for the edit battle (optional)"
+                maxLength="140"
+              />
+              <p className="text-muted">{descriptionLength} / 140</p>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Soundcloud URL</Form.Label>
+              <Form.Control
+                value={soundcloudSubmission}
+                onChange={(event) =>
+                  setSoundcloudSubmission(event.target.value)
+                }
+                type="text"
+                placeholder="https://soundcloud.com/danpiamuzik/ariana-grande-3435-citypop-ver"
+                required
+              />
+            </Form.Group>
+            <ReactPlayer url={soundcloudSubmission} height="70%" />
+            <Form.Group className="mt-5">
+              <Button variant="dark" type="submit" onClick={submitForm}>
+                Submit edit
+              </Button>
+            </Form.Group>
+          </Form>
+        </Card>
       ) : (
         <h3 className="NotLoggedIn">Please Log In/Sign Up to participate!</h3>
       )}

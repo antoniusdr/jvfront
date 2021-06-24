@@ -4,6 +4,7 @@ import { selectUser } from "../../store/user/selectors";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 import { updateProfile } from "../../store/user/actions";
 
 function EditProfile() {
@@ -38,96 +39,108 @@ function EditProfile() {
 
   return (
     <div>
-      <Form as={Col} md={{ span: 6, offset: 3 }}>
-        <h1 className="mt-5 mb-5">Edit your profile information here</h1>
-        <Form.Group>
-          <Form.Label>First Name</Form.Label>
-          <Form.Control
-            value={firstName}
-            onChange={(event) => setFirstName(event.target.value)}
-            type="text"
-            placeholder={userInfo.firstName}
-            required
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Last Name</Form.Label>
-          <Form.Control
-            value={lastName}
-            onChange={(event) => setLastName(event.target.value)}
-            type="text"
-            placeholder={userInfo.lastName}
-            required
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            type="text"
-            placeholder={userInfo.email}
-            required
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Discord ID</Form.Label>
-          <Form.Control
-            value={discordName}
-            onChange={(event) => setDiscordName(event.target.value)}
-            type="text"
-            placeholder={userInfo.discordName}
-            required
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Instagram</Form.Label>
-          <Form.Control
-            value={instagramHandle}
-            onChange={(event) => setInstagramHandle(event.target.value)}
-            type="text"
-            placeholder={
-              userInfo.instagramHandle
-                ? userInfo.instagramHandle
-                : "@jarreauvandal"
-            }
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Twitch</Form.Label>
-          <Form.Control
-            value={twitchHandle}
-            onChange={(event) => setTwitchHandle(event.target.value)}
-            type="text"
-            placeholder={
-              userInfo.twitchHandle
-                ? userInfo.twitchHandle
-                : "twitch.tv/jarreauvandal"
-            }
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Edit Battle Contestant</Form.Label>
-          <Form.Control
-            value={editBattleContestant}
-            onChange={(event) => setEditBattleContestant(event.target.checked)}
-            type="checkbox"
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Receive updates via email</Form.Label>
-          <Form.Control
-            value={emailOptIn}
-            onChange={(event) => setEmailOptIn(event.target.checked)}
-            type="checkbox"
-          />
-        </Form.Group>
-        <Form.Group className="mt-5">
-          <Button variant="primary" type="submit" onClick={submitForm}>
-            Submit changes
-          </Button>
-        </Form.Group>
-      </Form>
+      <Card
+        bg="success"
+        style={{
+          width: "70rem",
+          marginTop: 50,
+          marginBottom: 50,
+          marginLeft: 400,
+        }}
+      >
+        <Form as={Col} md={{ span: 6, offset: 3 }} variant="light">
+          <h1 className="mt-5 mb-5">Edit your profile information here</h1>
+          <Form.Group>
+            <Form.Label text="light">First Name</Form.Label>
+            <Form.Control
+              value={firstName}
+              onChange={(event) => setFirstName(event.target.value)}
+              type="text"
+              placeholder={userInfo.firstName}
+              required
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Last Name</Form.Label>
+            <Form.Control
+              value={lastName}
+              onChange={(event) => setLastName(event.target.value)}
+              type="text"
+              placeholder={userInfo.lastName}
+              required
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              type="text"
+              placeholder={userInfo.email}
+              required
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Discord ID</Form.Label>
+            <Form.Control
+              value={discordName}
+              onChange={(event) => setDiscordName(event.target.value)}
+              type="text"
+              placeholder={userInfo.discordName}
+              required
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Instagram</Form.Label>
+            <Form.Control
+              value={instagramHandle}
+              onChange={(event) => setInstagramHandle(event.target.value)}
+              type="text"
+              placeholder={
+                userInfo.instagramHandle
+                  ? userInfo.instagramHandle
+                  : "@jarreauvandal"
+              }
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Twitch</Form.Label>
+            <Form.Control
+              value={twitchHandle}
+              onChange={(event) => setTwitchHandle(event.target.value)}
+              type="text"
+              placeholder={
+                userInfo.twitchHandle
+                  ? userInfo.twitchHandle
+                  : "twitch.tv/jarreauvandal"
+              }
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Edit Battle Contestant</Form.Label>
+            <Form.Control
+              value={editBattleContestant}
+              onChange={(event) =>
+                setEditBattleContestant(event.target.checked)
+              }
+              type="checkbox"
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Receive updates via email</Form.Label>
+            <Form.Control
+              value={emailOptIn}
+              onChange={(event) => setEmailOptIn(event.target.checked)}
+              type="checkbox"
+            />
+          </Form.Group>
+          <Form.Group className="mt-5">
+            <Button variant="primary" type="submit" onClick={submitForm}>
+              Submit changes
+            </Button>
+          </Form.Group>
+        </Form>
+      </Card>
     </div>
   );
 }

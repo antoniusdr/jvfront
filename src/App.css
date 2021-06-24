@@ -1,4 +1,12 @@
 .App {
-  background-color: #226119;
-  color: #e5ff00;
+  background-color: #01796f;
+  /* color: #f2f0f0; */
+}
+
+html {
+  background-color: #01796f;
+}
+
+.nav-text {
+  color: chocolate;
 }

@@ -46,8 +46,8 @@ function SoundCloudPlayer(props) {
               marginTop: 50,
               marginBottom: 50,
             }}
-            bg="secondary"
-            text="light"
+            bg="success"
+            text="warning"
           >
             <Card.Header as="h5">{props.nickname}</Card.Header>
             <Card.Body>
@@ -68,7 +68,11 @@ function SoundCloudPlayer(props) {
                       setScore(parseInt(e.target.value));
                     }}
                   ></input>
-                  <Button variant="primary" type="submit" onClick={submitScore}>
+                  <Button
+                    variant="secondary"
+                    type="submit"
+                    onClick={submitScore}
+                  >
                     Submit Score
                   </Button>
                 </Form>
@@ -78,7 +82,17 @@ function SoundCloudPlayer(props) {
               <p>Please login to vote</p>
             ) : props.activeContest === true ? (
               <>
-                <Button variant="primary" type="submit" onClick={submitForm}>
+                <Button
+                  variant="secondary"
+                  type="submit"
+                  style={{
+                    width: "10rem",
+                    marginTop: 10,
+                    marginBottom: 15,
+                    marginLeft: 10,
+                  }}
+                  onClick={submitForm}
+                >
                   Vote
                 </Button>
               </>

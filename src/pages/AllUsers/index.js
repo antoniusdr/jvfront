@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
-import Jumbotron from "react-bootstrap/Jumbotron";
+// import Jumbotron from "react-bootstrap/Jumbotron";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { fetchAllUsers } from "../../store/allUsers/actions";
@@ -12,7 +12,7 @@ import { deleteProfile, updateProfile } from "../../store/user/actions";
 function AllUsers() {
   const dispatch = useDispatch();
   const allUsers = useSelector(selectallUsers);
-  const [isAdmin, setIsAdmin] = useState(false);
+  // const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     dispatch(fetchAllUsers());

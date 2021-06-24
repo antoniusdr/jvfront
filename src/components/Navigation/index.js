@@ -7,6 +7,7 @@ import { selectToken, selectUser } from "../../store/user/selectors";
 import NavbarItem from "./NavbarItem";
 import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
+import "../../App.css";
 
 export default function Navigation() {
   const token = useSelector(selectToken);
@@ -16,7 +17,7 @@ export default function Navigation() {
 
   return (
     <div className="NavBar">
-      <Navbar expand="lg">
+      <Navbar expand="lg" bg="warning" variant="dark">
         <Navbar.Brand as={NavLink} to="/">
           VANDALIZED GANG
         </Navbar.Brand>

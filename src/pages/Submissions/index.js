@@ -23,8 +23,16 @@ function Submissions() {
 
   return (
     <div>
-      <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
+      <Dropdown
+        text="warning"
+        style={{
+          width: "10rem",
+          marginTop: 20,
+          marginBottom: 10,
+          marginLeft: 1130,
+        }}
+      >
+        <Dropdown.Toggle variant="success" id="dropdown-basic" variant="dark">
           Select Contest
         </Dropdown.Toggle>
 
@@ -73,6 +81,7 @@ function Submissions() {
                   soundcloudUrl={submission.soundcloudUrl}
                   songDescription={submission.songDescription}
                   userId={submission.userId}
+                  contestId={submission.contestId}
                   submissionId={submission.id}
                   activeContest={true}
                 />
