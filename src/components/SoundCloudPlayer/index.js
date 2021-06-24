@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import ReactPlayer from "react-player/soundcloud";
 import Card from "react-bootstrap/Card";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,38 +37,55 @@ function SoundCloudPlayer(props) {
 
   return (
     <div>
-      <Card>
-        <Card.Header>{props.nickname}</Card.Header>
-        <Card.Body>
-          <Card.Text>{props.songDescription}</Card.Text>
-          <ReactPlayer url={props.soundcloudUrl} height="70%" />
-          <p>Crowd votes: {votesPerSubmission.length}</p>
-          {user.isAdmin ? (
-            <Form>
-              <input
-                type="number"
-                placeholder={props.trackScore}
-                value={score}
-                onChange={(e) => {
-                  setScore(parseInt(e.target.value));
-                }}
-              ></input>
-              <Button variant="primary" type="submit" onClick={submitScore}>
-                Submit Score
-              </Button>
-            </Form>
-          ) : null}
-        </Card.Body>
-        {user.token === null ? (
-          <p>Please login to vote</p>
-        ) : props.activeContest === true ? (
-          <>
-            <Button variant="primary" type="submit" onClick={submitForm}>
-              Vote
-            </Button>
-          </>
-        ) : null}
-      </Card>
+      <Col md={{ span: 6, offset: 3 }}>
+        <Container>
+          <Card
+            className="submissionCard"
+            style={{
+              width: "50rem",
+              marginTop: 50,
+              marginBottom: 50,
+            }}
+            bg="secondary"
+            text="light"
+          >
+            <Card.Header as="h5">{props.nickname}</Card.Header>
+            <Card.Body>
+              <Card.Text>{props.songDescription}</Card.Text>
+              <ReactPlayer url={props.soundcloudUrl} height="70%" />
+              <Card.Text>
+                <small className="text-muted">
+                  Crowd votes: {votesPerSubmission.length}
+                </small>
+              </Card.Text>
+              {user.isAdmin ? (
+                <Form>
+                  <input
+                    type="number"
+                    placeholder={props.trackScore}
+                    value={score}
+                    onChange={(e) => {
+                      setScore(parseInt(e.target.value));
+                    }}
+                  ></input>
+                  <Button variant="primary" type="submit" onClick={submitScore}>
+                    Submit Score
+                  </Button>
+                </Form>
+              ) : null}
+            </Card.Body>
+            {user.token === null ? (
+              <p>Please login to vote</p>
+            ) : props.activeContest === true ? (
+              <>
+                <Button variant="primary" type="submit" onClick={submitForm}>
+                  Vote
+                </Button>
+              </>
+            ) : null}
+          </Card>
+        </Container>
+      </Col>
     </div>
   );
 }

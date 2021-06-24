@@ -55,6 +55,8 @@ function Archive() {
                 songDescription={submission.songDescription}
                 userId={submission.userId}
                 activeContest={false}
+                contestId={submission.contestId}
+                trackScore={submission.trackScore}
               />
             );
           })
@@ -71,6 +73,8 @@ function Archive() {
                   songDescription={submission.songDescription}
                   userId={submission.userId}
                   activeContest={false}
+                  contestId={submission.contestId}
+                  trackScore={submission.trackScore}
                 />
               );
             })}

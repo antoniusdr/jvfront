@@ -8,11 +8,7 @@ function Home() {
   useEffect(() => {
     dispatch(fetchContests());
   }, [dispatch]);
-  return (
-    <div>
-      <h1>Updates here!</h1>
-    </div>
-  );
+  return <div></div>;
 }
 
 export default Home;

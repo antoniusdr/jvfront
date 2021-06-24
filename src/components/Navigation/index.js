@@ -15,31 +15,33 @@ export default function Navigation() {
   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
 
   return (
-    <Navbar bg="light" expand="lg">
-      <Navbar.Brand as={NavLink} to="/">
-        VANDALIZED GANG
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav style={{ width: "100%" }} fill>
-          <NavbarItem path="/" linkText="Home" />
-          <NavbarItem path="/submissions" linkText="All Submissions" />
-          <NavbarItem path="/submit" linkText="Participate to contest" />
-          <NavbarItem path="/archive" linkText="Archive" />{" "}
-          {user.isAdmin ? (
-            <>
-              <NavbarItem path="/createcontest" linkText="Create Contest" />
-              <NavbarItem path="/allusers" linkText="Admin View" />{" "}
-            </>
-          ) : null}
-          {token ? (
-            <>
-              <NavbarItem path="/editprofile" linkText="Edit Profile" />
-            </>
-          ) : null}
-          {loginLogoutControls}
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+    <div className="NavBar">
+      <Navbar expand="lg">
+        <Navbar.Brand as={NavLink} to="/">
+          VANDALIZED GANG
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav style={{ width: "100%" }} fill>
+            <NavbarItem path="/" linkText="Home" />
+            <NavbarItem path="/submissions" linkText="All Submissions" />
+            <NavbarItem path="/submit" linkText="Participate to contest" />
+            <NavbarItem path="/archive" linkText="Archive" />{" "}
+            {user.isAdmin ? (
+              <>
+                <NavbarItem path="/createcontest" linkText="Create Contest" />
+                <NavbarItem path="/allusers" linkText="Admin View" />{" "}
+              </>
+            ) : null}
+            {token ? (
+              <>
+                <NavbarItem path="/editprofile" linkText="Edit Profile" />
+              </>
+            ) : null}
+            {loginLogoutControls}
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    </div>
   );
 }
