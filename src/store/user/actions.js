@@ -13,6 +13,7 @@ export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
 export const LOG_OUT = "LOG_OUT";
 export const PROFILE_UPDATED = "PROFILE_UPDATED";
 export const FETCH_ALL_USERS = "FETCH_ALL_USERS";
+export const DELETE_USER = "DELETE_USER";
 
 export const fetchAllUsers = (users) => ({
   type: FETCH_ALL_USERS,
@@ -24,6 +25,11 @@ export const profileUpdated = (profile) => ({
   payload: profile,
 });
 
+export const deleteUser = (user) => ({
+  type: DELETE_USER,
+  payload: user,
+});
+
 export const updateProfile = (
   firstName,
   lastName,
@@ -32,7 +38,8 @@ export const updateProfile = (
   editBattleContestant,
   instagramHandle,
   twitchHandle,
-  emailOptIn
+  emailOptIn,
+  isAdmin
 ) => {
   return async (dispatch, getState) => {
     const { id } = selectUser(getState());
@@ -45,6 +52,7 @@ export const updateProfile = (
       instagramHandle,
       twitchHandle,
       emailOptIn,
+      isAdmin,
     });
     dispatch(profileUpdated(res.data));
     dispatch(
@@ -128,6 +136,20 @@ export const login = (email, password) => {
         dispatch(setMessage("danger", true, error.message));
       }
       dispatch(appDoneLoading());
+    }
+  };
+};
+
+export const deleteProfile = () => {
+  return async (dispatch, getState) => {
+    try {
+      const profileToDelete = await axios.delete(`${apiUrl}/user/:id/delete`);
+      dispatch(deleteProfile(profileToDelete));
+      dispatch(
+        showMessageWithTimeout("success", false, "profile deleted", 1500)
+      );
+    } catch (error) {
+      return console.log(error);
     }
   };
 };

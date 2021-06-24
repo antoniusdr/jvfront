@@ -7,6 +7,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { fetchAllUsers } from "../../store/allUsers/actions";
 import { selectallUsers } from "../../store/allUsers/selectors";
+import { deleteProfile, updateProfile } from "../../store/user/actions";
 
 function AllUsers() {
   const dispatch = useDispatch();
@@ -18,11 +19,11 @@ function AllUsers() {
   }, [dispatch]);
 
   function giveAdmin(e) {
-    dispatch();
+    dispatch(updateProfile({ isAdmin: true }));
   }
 
   function deleteUser(e) {
-    dispatch();
+    dispatch(deleteProfile());
   }
 
   return (
@@ -38,22 +39,15 @@ function AllUsers() {
                   {user.firstName} {user.lastName}
                 </p>
                 <p>{user.email}</p>
-                {/* <Form>
-                  <Form.Group>
-                    <Form.Label>Give admin</Form.Label>
-                    <Form.Control
-                      type="checkbox"
-                      value={isAdmin}
-                      onChange={(e) => {
-                        setIsAdmin(e.target.checked);
-                      }}
-                    ></Form.Control>
-                  </Form.Group>
-                </Form> */}
                 <Button variant="primary" type="submit" onClick={giveAdmin}>
                   Give admin power
-                </Button>
-                <Button variant="primary" type="submit" onClick={deleteUser}>
+                </Button>{" "}
+                <Button
+                  variant="primary"
+                  type="submit"
+                  onClick={deleteUser}
+                  value={user.id}
+                >
                   Delete user
                 </Button>
               </Container>

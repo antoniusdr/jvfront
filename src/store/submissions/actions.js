@@ -10,6 +10,8 @@ export const POST_SUBMISSION_SUCCESS = "POST_SUBMISSION_SUCCESS";
 
 export const POST_VOTE_SUCCESS = "POST_VOTE_SUCCESS";
 
+export const UPDATE_SCORE = "UPDATE_SCORE";
+
 export const fetchSubmissionsSuccess = (submissions) => ({
   type: FETCH_SUBMISSIONS_SUCCESS,
   payload: submissions,
@@ -24,13 +26,18 @@ export const newVote = (vote) => ({
   payload: vote,
 });
 
+export const updateNewScore = (trackScore) => ({
+  type: UPDATE_SCORE,
+  payload: trackScore,
+});
+
 export const fetchSubmissions = () => {
   return async (dispatch, getState) => {
     const submissionCount = getState().submissions.length;
     const res = await axios.get(
       `${apiUrl}/submissions?limit=${DEFAULT_PAGINATION_LIMIT}&offset=${submissionCount}`
     );
-
+    console.log(res.data.submissions.rows);
     dispatch(fetchSubmissionsSuccess(res.data.submissions.rows));
   };
 };
@@ -48,6 +55,19 @@ export const postVote = (userId, submissionId, contestId) => {
       { headers: { Authorization: `Bearer ${token}` } }
     );
     console.log(res.data);
+  };
+};
+
+export const updateScore = (id, trackScore) => {
+  return async (dispatch, getState) => {
+    const res = await axios.patch(`${apiUrl}/submissions/score`, {
+      id,
+      trackScore,
+    });
+    dispatch(updateNewScore(res.data));
+    dispatch(
+      showMessageWithTimeout("success", true, "Score successfully updated!")
+    );
   };
 };
 

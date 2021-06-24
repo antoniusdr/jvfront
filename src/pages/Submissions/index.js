@@ -57,6 +57,7 @@ function Submissions() {
                 submissionId={submission.id}
                 activeContest={true}
                 contestId={submission.contestId}
+                trackScore={submission.trackScore}
               />
             );
           })

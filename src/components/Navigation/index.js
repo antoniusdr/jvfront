@@ -25,15 +25,17 @@ export default function Navigation() {
           <NavbarItem path="/" linkText="Home" />
           <NavbarItem path="/submissions" linkText="All Submissions" />
           <NavbarItem path="/submit" linkText="Participate to contest" />
-          <NavbarItem path="/archive" linkText="Archive" />
-          <NavbarItem path="/createcontest" linkText="Create Contest" />
-          <NavbarItem path="/allusers" linkText="Admin View" />
+          <NavbarItem path="/archive" linkText="Archive" />{" "}
+          {user.isAdmin ? (
+            <>
+              <NavbarItem path="/createcontest" linkText="Create Contest" />
+              <NavbarItem path="/allusers" linkText="Admin View" />{" "}
+            </>
+          ) : null}
           {token ? (
             <>
               <NavbarItem path="/editprofile" linkText="Edit Profile" />
             </>
-          ) : user.isAdmin ? (
-            <NavbarItem path="/createcontest" linkText="Create Contest" />
           ) : null}
           {loginLogoutControls}
         </Nav>

@@ -4,6 +4,7 @@ import user from "./user/reducer";
 import submissions from "./submissions/reducer";
 import contests from "./contests/reducer";
 import allUsers from "./allUsers/reducer";
+import userVotes from "./userVotes/reducer";
 
 export default combineReducers({
   appState,
@@ -11,4 +12,5 @@ export default combineReducers({
   submissions,
   contests,
   allUsers,
+  userVotes,
 });
